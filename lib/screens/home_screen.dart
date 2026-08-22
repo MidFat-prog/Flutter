@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'products_screen.dart';
 import 'profile_screen.dart';
+import 'tasks_screen.dart';
+import 'weather_screen.dart';
 import '../theme/app_colors.dart';
 
-/// Home screen — now a container that hosts three tabs via a working
-/// BottomNavigationBar: Home, Products (GridView), Profile.
+/// Home screen — now a container that hosts five tabs via a working
+/// BottomNavigationBar: Home, Products, Tasks (To-Do CRUD),
+/// Weather (Week 4 mini project), Profile.
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -15,11 +18,19 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
 
-  static const List<String> _titles = ['Home', 'Products', 'Profile'];
+  static const List<String> _titles = [
+    'Home',
+    'Products',
+    'Tasks',
+    'Weather',
+    'Profile',
+  ];
 
   static const List<Widget> _tabs = [
     _HomeTab(),
     ProductsTab(),
+    TasksTab(),
+    WeatherScreen(),
     ProfileTab(),
   ];
 
@@ -40,10 +51,13 @@ class _HomeScreenState extends State<HomeScreen> {
         children: _tabs,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
         backgroundColor: Colors.white,
         selectedItemColor: AppColors.primary,
         unselectedItemColor: AppColors.textGrey,
+        selectedFontSize: 11,
+        unselectedFontSize: 11,
         onTap: (index) {
           setState(() => _currentIndex = index);
         },
@@ -51,6 +65,10 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Home'),
           BottomNavigationBarItem(
               icon: Icon(Icons.grid_view_outlined), label: 'Products'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.checklist_rtl_outlined), label: 'Tasks'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.wb_sunny_outlined), label: 'Weather'),
           BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Profile'),
         ],
       ),
